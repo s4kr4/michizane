@@ -9,6 +9,11 @@ import configureStore from './configureStore'
 const store = configureStore();
 
 injectGlobal`
+  @font-face {
+    font-family: 'Inconsolata';
+    src: url('./fonts/Inconsolata-Regular.ttf') format('truetype');
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -16,6 +21,8 @@ injectGlobal`
 
   html,body,#root {
     height: 100%;
+    font-family: Inconsolata;
+    font-size: 1em;
   }
 `
 

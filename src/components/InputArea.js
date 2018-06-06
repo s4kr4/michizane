@@ -12,8 +12,12 @@ export default styled(InputArea)`
   width: 50%;
 
   textarea {
+    box-sizing: border-box;
+    padding: 10px;
     width: 100%;
     min-height: 90%;
     resize: none;
+    font-family: Inconsolata;
+    font-size: 1em;
   }
 `
