@@ -4,7 +4,7 @@ import * as editorModule from '../modules/Editor'
 import Editor from '../components/Editor'
 
 const mapStateToProps = state => ({
-  value: state.value
+  output: state.Editor.output,
 })
 
 const mapDispatchToProps = dispatch => ({
