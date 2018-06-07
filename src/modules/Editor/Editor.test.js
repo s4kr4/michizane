@@ -1,7 +1,7 @@
 import reducer, {
   initialState,
   INPUT_TEXT,
-} from './Editor'
+} from '.'
 
 describe('Editor reducer', () => {
   it('should be initialState', () => {
@@ -14,7 +14,7 @@ describe('Editor reducer', () => {
   it('should output normal text', () => {
     expect(reducer(undefined, {
       type: INPUT_TEXT,
-      input: 'normal text',
+      payload: 'normal text',
     }))
       .toEqual({
         output: 'normal text',

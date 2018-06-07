@@ -1,8 +1,10 @@
+import { translate } from './processor'
+
 export const INPUT_TEXT = 'INPUT_TEXT'
 
 export const inputText = input => ({
   type: INPUT_TEXT,
-  input,
+  payload: input,
 })
 
 export const initialState = {
@@ -13,9 +15,11 @@ export const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case INPUT_TEXT:
+      const output = translate(action.payload)
+
       return {
         ...state,
-        output: action.input,
+        output: output,
       }
     default:
       return state
