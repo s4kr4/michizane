@@ -1,11 +1,11 @@
-const INPUT_TEXT = 'INPUT_TEXT'
+export const INPUT_TEXT = 'INPUT_TEXT'
 
 export const inputText = input => ({
   type: INPUT_TEXT,
   input,
 })
 
-const initialState = {
+export const initialState = {
   output: '',
 }
 
