@@ -8,7 +8,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  inputText: (value) => dispatch(editorModule.inputText(value))
+  inputText: value => dispatch(editorModule.inputText(value)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Editor)

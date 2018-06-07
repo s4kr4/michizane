@@ -6,7 +6,7 @@ export const inputText = input => ({
 })
 
 const initialState = {
-  output: ''
+  output: '',
 }
 
 // Reducer
