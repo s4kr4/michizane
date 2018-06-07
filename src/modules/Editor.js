@@ -5,8 +5,12 @@ export const inputText = input => ({
   input,
 })
 
+const initialState = {
+  output: ''
+}
+
 // Reducer
-export default (state = {}, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case INPUT_TEXT:
       return {

@@ -2,13 +2,25 @@ import React from 'react'
 
 import styled from '../styled-components'
 
-const OutputArea = ({ className, output }) => (
-  <div className={className}>
-    <div className="output">
-      {output}
+const OutputArea = ({ className, output }) => {
+  const displayString = output
+    .split('\n')
+    .map((row, i) => (
+      <span key={i}>
+        {row}
+        <br />
+      </span>
+    ))
+
+
+  return (
+    <div className={className}>
+      <div className="output">
+        {displayString}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default styled(OutputArea)`
   max-width: 50%;
