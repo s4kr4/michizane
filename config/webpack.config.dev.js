@@ -53,6 +53,8 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
+              configFile: 'eslint.json',
+              fix: true,
             },
           },
         ],
