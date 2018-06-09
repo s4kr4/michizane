@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 
 import * as editorModule from '../modules/Editor'
-import Editor from '../components/Editor'
+import Editor from '../components/organisums/Editor'
 
 const mapStateToProps = state => ({
+  input: state.Editor.input,
   output: state.Editor.output,
 })
 

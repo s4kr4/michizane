@@ -1,8 +1,8 @@
 import React from 'react'
 
-import InputArea from './InputArea'
-import OutputArea from './OutputArea'
-import styled from '../styled-components'
+import InputArea from '../molecules/InputArea'
+import OutputArea from '../molecules/OutputArea'
+import styled from '../../styled-components'
 
 class Editor extends React.Component {
   constructor(props) {

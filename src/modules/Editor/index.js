@@ -20,6 +20,7 @@ export const changeTranslateMode = mode => ({
 
 export const initialState = {
   translateMode: TranslateMode.QIITA_TO_GITHUB,
+  input: '',
   output: '',
 }
 
@@ -31,6 +32,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
+        input: action.payload,
         output: output,
       }
 

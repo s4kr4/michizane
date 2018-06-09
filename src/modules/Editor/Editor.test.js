@@ -6,6 +6,7 @@ import reducer, {
 describe('Editor reducer(Qiita -> GitHub)', () => {
   const initialState = {
     translateMode: TranslateMode.QIITA_TO_GITHUB,
+    input: '',
     output: '',
   }
 
@@ -23,6 +24,7 @@ describe('Editor reducer(Qiita -> GitHub)', () => {
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
+        input: 'normal text',
         output: 'normal text',
       })
   })
@@ -30,13 +32,12 @@ describe('Editor reducer(Qiita -> GitHub)', () => {
   it('should translate a line break', () => {
     expect(reducer(initialState, {
       type: INPUT_TEXT,
-      payload: `test
-test`,
+      payload: "test\ntest",
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
-        output: `test  
-test`,
+        input: "test\ntest",
+        output: "test  \ntest",
       })
   })
 })
