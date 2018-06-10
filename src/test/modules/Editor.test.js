@@ -1,7 +1,7 @@
 import reducer, {
   TranslateMode,
   INPUT_TEXT,
-} from '.'
+} from '../../modules/Editor'
 
 describe('Editor reducer(Qiita -> GitHub)', () => {
   const initialState = {
