@@ -17,6 +17,13 @@ export const translate = (input, translateMode) => {
           case 'paragraph_close':
             token.content = '\n\n'
             break
+          case 'fence':
+            const syntax = token.info.match(/(\w+):/)
+            token.content =
+              `${token.markup}${syntax ? syntax[1] : ''}\n` +
+              token.content +
+              `${token.markup}\n`
+            break
           default:
             break
         }

@@ -52,4 +52,28 @@ describe('Editor reducer(Qiita -> GitHub)', () => {
         output: '',
       })
   })
+
+  it('should get syntax name from code block title', () => {
+    expect(reducer(initialState, {
+      type: INPUT_TEXT,
+      payload: '```javascript:test.js\nconsole.log("test")\n```',
+    }))
+      .toEqual({
+        translateMode: TranslateMode.QIITA_TO_GITHUB,
+        input: '```javascript:test.js\nconsole.log("test")\n```',
+        output: '```javascript\nconsole.log("test")\n```',
+      })
+  })
+
+  it('should delete filename from code block title', () => {
+    expect(reducer(initialState, {
+      type: INPUT_TEXT,
+      payload: '```:test.js\nconsole.log("test")\n```',
+    }))
+      .toEqual({
+        translateMode: TranslateMode.QIITA_TO_GITHUB,
+        input: '```:test.js\nconsole.log("test")\n```',
+        output: '```\nconsole.log("test")\n```',
+      })
+  })
 })
