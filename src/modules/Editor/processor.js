@@ -10,12 +10,15 @@ export const translate = (input, translateMode) => {
   switch (translateMode) {
     case TranslateMode.QIITA_TO_GITHUB:
       for (const token of tree) {
-        if (token.type === 'inline') {
-          token.content = token.content.replace(/\n/g, '  \n')
-        }
-
-        if (token.type === 'paragraph_close') {
-          token.content = '\n\n'
+        switch (token.type) {
+          case 'inline':
+            token.content = token.content.replace(/\n/g, '  \n')
+            break
+          case 'paragraph_close':
+            token.content = '\n\n'
+            break
+          default:
+            break
         }
       }
 
