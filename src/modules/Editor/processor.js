@@ -24,7 +24,9 @@ export const translate = (input, translateMode) => {
         output += token.content
       }
 
-      return output.replace(/(\s|\n)+$/g, '')
+      // Delete trailing white spaces
+      output = output.replace(/(\s|\n)+$/g, '')
+      return output
 
     default:
       return input

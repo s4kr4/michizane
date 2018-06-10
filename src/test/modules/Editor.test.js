@@ -40,4 +40,16 @@ describe('Editor reducer(Qiita -> GitHub)', () => {
         output: "test  \ntest",
       })
   })
+
+  it('should delete trailing white spaces', () => {
+    expect(reducer(initialState, {
+      type: INPUT_TEXT,
+      payload: '  \n',
+    }))
+      .toEqual({
+        translateMode: TranslateMode.QIITA_TO_GITHUB,
+        input: '  \n',
+        output: '',
+      })
+  })
 })
