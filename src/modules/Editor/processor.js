@@ -9,17 +9,18 @@ export const translate = (input, translateMode) => {
 
   switch (translateMode) {
     case TranslateMode.QIITA_TO_GITHUB:
+      let output = ''
       for (const token of tree) {
         switch (token.type) {
           case 'inline':
-            token.content = token.content.replace(/\n/g, '  \n')
+            output += token.content.replace(/\n/g, '  \n')
             break
           case 'paragraph_close':
-            token.content = '\n\n'
+            output += '\n\n'
             break
           case 'fence':
             const syntax = token.info.match(/(\w+):/)
-            token.content =
+            output +=
               `${token.markup}${syntax ? syntax[1] : ''}\n` +
               token.content +
               `${token.markup}\n`
@@ -27,11 +28,6 @@ export const translate = (input, translateMode) => {
           default:
             break
         }
-      }
-
-      let output = ''
-      for (const token of tree) {
-        output += token.content
       }
 
       // Delete trailing white spaces
