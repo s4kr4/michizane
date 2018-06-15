@@ -18,85 +18,99 @@ describe('Editor reducer(Qiita -> GitHub)', () => {
   })
 
   it('should output normal text', () => {
+    const payload = 'normal text'
+
     expect(reducer(initialState, {
       type: INPUT_TEXT,
-      payload: 'normal text',
+      payload: payload,
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
-        input: 'normal text',
+        input: payload,
         output: 'normal text',
       })
   })
 
   it('should translate a line break', () => {
+    const payload = 'test\ntest'
+
     expect(reducer(initialState, {
       type: INPUT_TEXT,
-      payload: "test\ntest",
+      payload: payload,
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
-        input: "test\ntest",
+        input: payload,
         output: "test  \ntest",
       })
   })
 
   it('should delete trailing white spaces', () => {
+    const payload = '  \n'
+
     expect(reducer(initialState, {
       type: INPUT_TEXT,
-      payload: '  \n',
+      payload: payload,
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
-        input: '  \n',
+        input: payload,
         output: '',
       })
   })
 
   it('should get syntax name from code block title', () => {
+    const payload = '```javascript:test.js\nconsole.log("test")\n```'
+
     expect(reducer(initialState, {
       type: INPUT_TEXT,
-      payload: '```javascript:test.js\nconsole.log("test")\n```',
+      payload: payload,
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
-        input: '```javascript:test.js\nconsole.log("test")\n```',
+        input: payload,
         output: '```javascript\nconsole.log("test")\n```',
       })
   })
 
   it('should delete filename from code block title', () => {
+    const payload = '```:test.js\nconsole.log("test")\n```'
+
     expect(reducer(initialState, {
       type: INPUT_TEXT,
-      payload: '```:test.js\nconsole.log("test")\n```',
+      payload: payload,
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
-        input: '```:test.js\nconsole.log("test")\n```',
+        input: payload,
         output: '```\nconsole.log("test")\n```',
       })
   })
 
   it('should not translate h1 ~ h6', () => {
+    const payload = '# header1\n\n## header2\n\n###### header6'
+
     expect(reducer(initialState, {
       type: INPUT_TEXT,
-      payload: '# header1\n\n## header2\n\n###### header6',
+      payload: payload,
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
-        input: '# header1\n\n## header2\n\n###### header6',
+        input: payload,
         output: '# header1\n\n## header2\n\n###### header6',
       })
   })
 
   it('should reduce line breaks after h1 ~ h6', () => {
+    const payload = '# header1\n\n\n## header2\n\n\n\n###### header6'
+
     expect(reducer(initialState, {
       type: INPUT_TEXT,
-      payload: '# header1\n\n\n## header2\n\n\n\n###### header6',
+      payload: payload,
     }))
       .toEqual({
         translateMode: TranslateMode.QIITA_TO_GITHUB,
-        input: '# header1\n\n\n## header2\n\n\n\n###### header6',
+        input: payload,
         output: '# header1\n\n## header2\n\n###### header6',
       })
   })
