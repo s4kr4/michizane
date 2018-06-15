@@ -76,4 +76,28 @@ describe('Editor reducer(Qiita -> GitHub)', () => {
         output: '```\nconsole.log("test")\n```',
       })
   })
+
+  it('should not translate h1 ~ h6', () => {
+    expect(reducer(initialState, {
+      type: INPUT_TEXT,
+      payload: '# header1\n\n## header2\n\n###### header6',
+    }))
+      .toEqual({
+        translateMode: TranslateMode.QIITA_TO_GITHUB,
+        input: '# header1\n\n## header2\n\n###### header6',
+        output: '# header1\n\n## header2\n\n###### header6',
+      })
+  })
+
+  it('should reduce line breaks after h1 ~ h6', () => {
+    expect(reducer(initialState, {
+      type: INPUT_TEXT,
+      payload: '# header1\n\n\n## header2\n\n\n\n###### header6',
+    }))
+      .toEqual({
+        translateMode: TranslateMode.QIITA_TO_GITHUB,
+        input: '# header1\n\n\n## header2\n\n\n\n###### header6',
+        output: '# header1\n\n## header2\n\n###### header6',
+      })
+  })
 })
