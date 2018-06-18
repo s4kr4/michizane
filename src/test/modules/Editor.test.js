@@ -114,4 +114,18 @@ describe('Editor reducer(Qiita -> GitHub)', () => {
         output: '# header1\n\n## header2\n\n###### header6',
       })
   })
+
+  it('should not translate list items', () => {
+    const payload = '* item1\n* item2'
+
+    expect(reducer(initialState, {
+      type: INPUT_TEXT,
+      payload: payload,
+    }))
+      .toEqual({
+        translateMode: TranslateMode.QIITA_TO_GITHUB,
+        input: payload,
+        output: '* item1\n* item2',
+      })
+  })
 })
