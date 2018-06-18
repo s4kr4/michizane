@@ -3,6 +3,10 @@ import MarkdownIt from 'markdown-it'
 import { TranslateMode } from '.'
 
 const md = new MarkdownIt()
+const TAG_TYPE = {
+  HEADING: 'HEADING',
+  LIST_ITEM: 'LIST_ITEM',
+}
 
 export const translate = (input, translateMode) => {
   const tree = md.parse(input)
@@ -10,16 +14,22 @@ export const translate = (input, translateMode) => {
   switch (translateMode) {
     case TranslateMode.QIITA_TO_GITHUB:
       let output = ''
-      let heading = false
+      let tagStack = []
 
       for (const token of tree) {
+        const tagType = tagStack.pop()
         switch (token.type) {
           case 'inline':
-            if (!heading) {
-              output += token.content.replace(/\n/g, '  \n')
-            } else {
-              output += `${token.content}\n\n`
-              heading = !heading
+            switch (tagType) {
+              case TAG_TYPE.HEADING:
+                output += `${token.content}\n\n`
+                break
+              case TAG_TYPE.LIST_ITEM:
+                output += `${token.content}\n`
+                break
+              default:
+                output += token.content.replace(/\n/g, '  \n')
+                break
             }
             break
           case 'paragraph_close':
@@ -34,7 +44,11 @@ export const translate = (input, translateMode) => {
             break
           case 'heading_open':
             output += `${token.markup} `
-            heading = !heading
+            tagStack.push(TAG_TYPE.HEADING)
+            break
+          case 'list_item_open':
+            output += `${token.markup} `
+            tagStack.push(TAG_TYPE.LIST_ITEM)
             break
           default:
             break
